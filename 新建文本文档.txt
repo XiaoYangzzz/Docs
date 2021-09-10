@@ -1,0 +1,11 @@
+1.搜索框自动出内容，关键字高亮显示
+//获取输入的内容作为高亮关键词
+var input_data = $("#fuzzy_search").val()
+//i 忽略大小写 g 全局 m 多行，切记不能加“/”，使用RegExp或自动加上
+var rexq = new RegExp(input_data,"igm")
+$.each(data, function (i, data) {
+	var data_complte = data["template_rule_name"] + "," + data["template_name"] + "," + data["template_desc"]
+	data_complte = data_complte.replace(rexq,"<font size='+1' color='#dc143c'>"+input_data+"</font>")
+	var html_style = "<a href='javascript:'><li class='list-group-item' onclick='choise_one_template(this)'>" + data_complte + "</li></a>"
+	$(".list-group").append(html_style)
+})
